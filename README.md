@@ -1,5 +1,5 @@
-# atx-advisor-chief
-atx-advisor-chief handles distribution of symbol units among advisors
+# atx-advisor-zeus
+⚡ Zeus : Chief Advisor who forwards work orders to other Advisors. 
 
 
 

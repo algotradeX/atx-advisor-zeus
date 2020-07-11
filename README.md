@@ -31,4 +31,9 @@ The following guides illustrate how to use some features concretely:
 * [Building a RESTful Web Service with Spring Boot Actuator](https://spring.io/guides/gs/actuator-service/)
 
 
+### API Documentation
+API Docs are generated using SpringFox Swagger2
+
+API Docs UI can be found at [http://localhost:8111/swagger-ui.html#/](http://localhost:8111/swagger-ui.html#/)
+
 

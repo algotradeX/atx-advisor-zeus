@@ -1,15 +1,21 @@
 package com.atx.advisor.zeus.controller;
 
+import com.atx.advisor.zeus.common.entity.AlgorithmQueryEntity;
+import com.atx.advisor.zeus.common.response.AlgorithmListEventResponse;
+import com.atx.advisor.zeus.service.query.AlgorithmQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Controller
 @RestController
@@ -18,14 +24,32 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AlgorithmQueryController {
 
-    @ApiOperation(value = "API to GET algorithm", notes = "Get algorithm information", tags = { "Algorithm" })
+    private final AlgorithmQueryService algorithmQueryService;
+
+    @Autowired
+    public AlgorithmQueryController(AlgorithmQueryService algorithmQueryService) {
+        this.algorithmQueryService = algorithmQueryService;
+    }
+
+    @ApiOperation(value = "API to GET algorithm entity", notes = "Get algorithm information", tags = { "Algorithm" })
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Returns algorithm model", response = String.class )
+            @ApiResponse(code = 200, message = "Returns AlgorithmQueryEntity model", response = AlgorithmQueryEntity.class )
     })
-    @GetMapping("/{algorithmId}")
-    public String getAlgorithm(@PathVariable(value = "algorithmId") String algorithmId) {
-        log.info("AlgorithmCommandController : GET /algorithm/{}", algorithmId);
-        return algorithmId;
+    @GetMapping("/{algorithmId}/entity")
+    public AlgorithmQueryEntity getAlgorithmById(@PathVariable(value = "algorithmId") String algorithmId) {
+        log.info("AlgorithmCommandController : GET /algorithm/{}/entity", algorithmId);
+        return algorithmQueryService.getAlgorithmById(algorithmId);
+    }
+
+    @ApiOperation(value = "API to GET algorithm events list", notes = "Get algorithm events", tags = { "Algorithm" })
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Returns AlgorithmQueryEntity model", response = AlgorithmListEventResponse.class )
+    })
+    @GetMapping("/{algorithmId}/events")
+    public AlgorithmListEventResponse getAllEventsForAlgorithm(@PathVariable(value = "algorithmId") String algorithmId) {
+        log.info("AlgorithmCommandController : GET /algorithm/{}/events", algorithmId);
+        List<Object> eventsList = algorithmQueryService.listEventsForAlgorithm(algorithmId);
+        return new AlgorithmListEventResponse(algorithmId, eventsList);
     }
 
 }

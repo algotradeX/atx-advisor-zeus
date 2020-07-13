@@ -2,8 +2,10 @@ package com.atx.advisor.zeus.config;
 
 import com.atx.advisor.zeus.aggregate.AlgorithmAggregate;
 import lombok.extern.slf4j.Slf4j;
+import org.axonframework.config.EventProcessingConfigurer;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.axonframework.eventsourcing.eventstore.EventStore;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,4 +21,10 @@ public class AxonConfig {
         log.info("AxonConfig : Created EventSourcingRepository algorithmAggregateEventSourcingRepository");
         return repository;
     }
+
+    @Autowired
+    public void configure(EventProcessingConfigurer configurer) {
+        configurer.usingTrackingEventProcessors();
+    }
+
 }

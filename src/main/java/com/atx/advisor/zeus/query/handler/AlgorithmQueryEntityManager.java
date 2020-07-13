@@ -5,7 +5,7 @@ import com.atx.advisor.zeus.common.entity.AlgorithmQueryEntity;
 import com.atx.advisor.zeus.common.event.BaseEvent;
 import com.atx.advisor.zeus.query.repository.AlgorithmRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.eventsourcing.EventSourcingHandler;
+import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.eventsourcing.EventSourcingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +24,7 @@ public class AlgorithmQueryEntityManager {
     @Qualifier("algorithmAggregateEventSourcingRepository")
     private EventSourcingRepository<AlgorithmAggregate> algorithmAggregateEventSourcingRepository;
 
-    @EventSourcingHandler
+    @EventHandler
     void on(BaseEvent event){
         persistAlgorithm(buildQueryAlgorithm(getAlgorithmFromEvent(event)));
     }

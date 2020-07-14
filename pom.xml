@@ -19,6 +19,10 @@
 		<spring-cloud.version>2020-1.BUILD-SNAPSHOT</spring-cloud.version>
 		<axon-spring-boot.version>4.3.5</axon-spring-boot.version>
 		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<sonar.projectKey>algotradeX_atx-advisor-zeus</sonar.projectKey>
+		<sonar.organization>algotradex</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.login>c27f0fec3a7e9517225b9f3c6ab7aa6156225194</sonar.login>
 	</properties>
 
 	<dependencies>
@@ -79,6 +83,14 @@
 			<artifactId>axon-spring-boot-starter</artifactId>
 			<version>${axon-spring-boot.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.axonframework/axon-test -->
+		<dependency>
+			<groupId>org.axonframework</groupId>
+			<artifactId>axon-test</artifactId>
+			<version>${axon-spring-boot.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 
 		<!-- SpringFox Swagger2 Dependencies -->
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->

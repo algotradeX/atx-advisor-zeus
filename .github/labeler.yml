@@ -1,6 +1,6 @@
 # Add 'test' label
 ":label: test :checkered_flag:":
-  - test/**/*
+  - src/test/**/*
 
 # Add github actions related updates to .github
 ":label: github-action :octocat:":

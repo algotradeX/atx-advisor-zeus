@@ -1,6 +1,6 @@
- name: Maven Build
+name: Maven Build
 
-on: 
+on:
   push:
     branches:
       - master

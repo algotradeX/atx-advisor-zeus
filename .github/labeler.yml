@@ -1,0 +1,10 @@
+# Add 'test' label
+":label: test :checkered_flag:":
+  - test/**/*
+
+# Add github actions related updates to .github
+":label: github-action :octocat:":
+  - .github/**/*
+
+":label: documentation :scroll:":
+  - README.md

@@ -22,7 +22,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 public class AlgorithmAggregate {
 
     @AggregateIdentifier
-    private String id;
+    private String algorithmId;
 
     private String name;
 
@@ -31,40 +31,41 @@ public class AlgorithmAggregate {
     private String cron;
 
     @CommandHandler
-    public AlgorithmAggregate(CreateAlgorithmCommand createAlgorithmCommand){
-        log.info("AlgorithmAggregate : handling CreateAlgorithmCommand {}", createAlgorithmCommand);
-        AggregateLifecycle.apply(new AlgorithmCreatedEvent(createAlgorithmCommand.id, createAlgorithmCommand.name, createAlgorithmCommand.description, createAlgorithmCommand.cron));
-        log.info("AlgorithmAggregate : applied AlgorithmCreatedEvent {}", createAlgorithmCommand);
+    public AlgorithmAggregate(CreateAlgorithmCommand command){
+        log.info("AlgorithmAggregate : handling CreateAlgorithmCommand {}", command);
+        AggregateLifecycle.apply(new AlgorithmCreatedEvent(command.algorithmId, command.name, command.description, command.cron));
+        log.info("AlgorithmAggregate : applied AlgorithmCreatedEvent {}", command);
     }
 
     @CommandHandler
-    protected void on(UpdateAlgorithmCommand updateAlgorithmCommand){
-        log.info("AlgorithmAggregate : handling UpdateAlgorithmCommand {}", updateAlgorithmCommand);
-        AggregateLifecycle.apply(new AlgorithmUpdatedEvent(updateAlgorithmCommand.id, updateAlgorithmCommand.name, updateAlgorithmCommand.description, updateAlgorithmCommand.cron));
-        log.info("AlgorithmAggregate : applied UpdateAlgorithmCommand {}", updateAlgorithmCommand);
+    protected void on(UpdateAlgorithmCommand command){
+        log.info("AlgorithmAggregate : handling UpdateAlgorithmCommand {}", command);
+        // TODO: check if any change happened
+        AggregateLifecycle.apply(new AlgorithmUpdatedEvent(command.algorithmId, command.name, command.description, command.cron));
+        log.info("AlgorithmAggregate : applied UpdateAlgorithmCommand {}", command);
     }
 
     @EventSourcingHandler
-    protected void on(AlgorithmCreatedEvent algorithmCreatedEvent){
-        log.info("AlgorithmAggregate : EventSourcingHandler listened to AlgorithmCreatedEvent {}", algorithmCreatedEvent);
-        this.id = algorithmCreatedEvent.id;
-        this.name = algorithmCreatedEvent.name;
-        this.description = algorithmCreatedEvent.description;
-        this.cron = algorithmCreatedEvent.cron;
+    protected void on(AlgorithmCreatedEvent event){
+        log.info("AlgorithmAggregate : EventSourcingHandler listened to AlgorithmCreatedEvent {}", event);
+        this.algorithmId = event.algorithmId;
+        this.name = event.name;
+        this.description = event.description;
+        this.cron = event.cron;
     }
 
     @EventSourcingHandler
-    protected void on(AlgorithmUpdatedEvent algorithmUpdatedEvent) {
-        log.info("AlgorithmAggregate : EventSourcingHandler listened to AlgorithmUpdatedEvent {}", algorithmUpdatedEvent);
-        this.id = algorithmUpdatedEvent.id;
-        if(algorithmUpdatedEvent.name != null) {
-            this.name = algorithmUpdatedEvent.name;
+    protected void on(AlgorithmUpdatedEvent event) {
+        log.info("AlgorithmAggregate : EventSourcingHandler listened to AlgorithmUpdatedEvent {}", event);
+        this.algorithmId = event.algorithmId;
+        if(event.name != null) {
+            this.name = event.name;
         }
-        if(algorithmUpdatedEvent.description != null) {
-            this.description = algorithmUpdatedEvent.description;
+        if(event.description != null) {
+            this.description = event.description;
         }
-        if(algorithmUpdatedEvent.cron != null) {
-            this.cron = algorithmUpdatedEvent.cron;
+        if(event.cron != null) {
+            this.cron = event.cron;
         }
     }
 }

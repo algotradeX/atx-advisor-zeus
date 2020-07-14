@@ -1,6 +1,6 @@
 package com.atx.advisor.zeus.common.event;
 
-public class AlgorithmUpdatedEvent extends BaseEvent<String> {
+public class AlgorithmUpdatedEvent extends AlgorithmBaseEvent<String> {
 
     public final String name;
 
@@ -8,8 +8,8 @@ public class AlgorithmUpdatedEvent extends BaseEvent<String> {
 
     public final String cron;
 
-    public AlgorithmUpdatedEvent(String id, String name, String description, String cron) {
-        super(id);
+    public AlgorithmUpdatedEvent(String algorithmId, String name, String description, String cron) {
+        super(algorithmId);
         this.name = name;
         this.description = description;
         this.cron = cron;

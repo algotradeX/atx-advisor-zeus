@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AlgorithmUpdateDTO {
 
-    private String id;
+    private String algorithmId;
 
     private String name;
 

@@ -7,12 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "AlgorithmQueryEntities")
+@Table(name = "Algorithms")
 @Data
 public class AlgorithmQueryEntity {
 
     @Id
-    private String id;
+    private String algorithmId;
 
     private String name;
 

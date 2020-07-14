@@ -4,11 +4,12 @@ import com.atx.advisor.zeus.common.entity.AlgorithmQueryEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public interface AlgorithmQueryService {
 
-    List<Object> listEventsForAlgorithm(String algorithmId);
+    CompletableFuture<List<Object>> listEventsForAlgorithm(String algorithmId);
 
-    AlgorithmQueryEntity getAlgorithmById(String algorithmId);
+    CompletableFuture<AlgorithmQueryEntity> getAlgorithmById(String algorithmId);
 }

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AlgorithmRepository extends CrudRepository<AlgorithmQueryEntity, String> {
+
+    AlgorithmQueryEntity findAlgorithmQueryEntityByAlgorithmId(String algorithmId);
 }

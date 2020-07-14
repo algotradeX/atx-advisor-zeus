@@ -1,6 +1,11 @@
 package com.atx.advisor.zeus.common.command;
 
-public class UpdateAlgorithmCommand extends BaseCommand<String> {
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
+
+public class UpdateAlgorithmCommand {
+
+    @TargetAggregateIdentifier
+    public final String algorithmId;
 
     public final String name;
 
@@ -8,8 +13,8 @@ public class UpdateAlgorithmCommand extends BaseCommand<String> {
 
     public final String cron;
 
-    public UpdateAlgorithmCommand(String id, String name, String description, String cron) {
-        super(id);
+    public UpdateAlgorithmCommand(String algorithmId, String name, String description, String cron) {
+        this.algorithmId = algorithmId;
         this.name = name;
         this.description = description;
         this.cron = cron;

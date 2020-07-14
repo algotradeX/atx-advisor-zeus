@@ -1,41 +1,35 @@
 package com.atx.advisor.zeus.service.query;
 
 import com.atx.advisor.zeus.common.entity.AlgorithmQueryEntity;
-import com.atx.advisor.zeus.query.repository.AlgorithmRepository;
+import com.atx.advisor.zeus.common.query.GetAlgorithmEventListQuery;
+import com.atx.advisor.zeus.common.query.GetAlgorithmQuery;
 import lombok.extern.slf4j.Slf4j;
-import org.axonframework.eventsourcing.eventstore.EventStore;
-import org.axonframework.messaging.Message;
+import org.axonframework.messaging.responsetypes.ResponseTypes;
+import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.concurrent.CompletableFuture;
 
 @Component
 @Slf4j
 public class AlgorithmQueryServiceImpl implements AlgorithmQueryService {
 
-    private final EventStore eventStore;
-
-    private final AlgorithmRepository algorithmRepository;
+    private final QueryGateway queryGateway;
 
     @Autowired
-    public AlgorithmQueryServiceImpl(EventStore eventStore, AlgorithmRepository algorithmRepository) {
-        this.eventStore = eventStore;
-        this.algorithmRepository = algorithmRepository;
+    public AlgorithmQueryServiceImpl(QueryGateway queryGateway) {
+        this.queryGateway = queryGateway;
     }
 
-    @Override
-    public List<Object> listEventsForAlgorithm(String algorithmId) {
+    public CompletableFuture<List<Object>> listEventsForAlgorithm(String algorithmId) {
         log.info("AlgorithmQueryServiceImpl : querying listEventsForAlgorithm {}", algorithmId);
-        return eventStore.readEvents(algorithmId).asStream().map(Message::getPayload).collect(Collectors.toList());
+        return queryGateway.query(new GetAlgorithmEventListQuery(algorithmId), ResponseTypes.multipleInstancesOf(Object.class));
     }
 
-    @Override
-    public AlgorithmQueryEntity getAlgorithmById(String algorithmId) {
+    public CompletableFuture<AlgorithmQueryEntity> getAlgorithmById(String algorithmId) {
         log.info("AlgorithmQueryServiceImpl : querying getAlgorithmById {}", algorithmId);
-        Optional<AlgorithmQueryEntity> optionalAlgorithmQueryEntity = algorithmRepository.findById(algorithmId);
-        return optionalAlgorithmQueryEntity.orElseGet(AlgorithmQueryEntity::new);
+        return queryGateway.query(new GetAlgorithmQuery(algorithmId), AlgorithmQueryEntity.class);
     }
 }

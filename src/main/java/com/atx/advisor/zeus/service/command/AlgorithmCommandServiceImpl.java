@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Component
@@ -23,11 +22,11 @@ public class AlgorithmCommandServiceImpl implements AlgorithmCommandService {
 
     public CompletableFuture<String> createAlgorithm(AlgorithmCreateDTO algorithmCreateDTO) {
         log.info("AlgorithmCommandServiceImpl : starting createAlgorithm operation {}", algorithmCreateDTO);
-        return commandGateway.send(new CreateAlgorithmCommand(UUID.randomUUID().toString(), algorithmCreateDTO.getName(), algorithmCreateDTO.getDescription(), algorithmCreateDTO.getCron()));
+        return commandGateway.send(new CreateAlgorithmCommand(algorithmCreateDTO.getAlgorithmId(), algorithmCreateDTO.getName(), algorithmCreateDTO.getDescription(), algorithmCreateDTO.getCron()));
     }
 
-    @Override public CompletableFuture<String> updateAlgorithm(AlgorithmUpdateDTO algorithmUpdateDTO) {
+    public CompletableFuture<String> updateAlgorithm(AlgorithmUpdateDTO algorithmUpdateDTO) {
         log.info("AlgorithmCommandServiceImpl : starting updateAlgorithm operation {}", algorithmUpdateDTO);
-        return commandGateway.send(new UpdateAlgorithmCommand(algorithmUpdateDTO.getId(), algorithmUpdateDTO.getName(), algorithmUpdateDTO.getDescription(), algorithmUpdateDTO.getCron()));
+        return commandGateway.send(new UpdateAlgorithmCommand(algorithmUpdateDTO.getAlgorithmId(), algorithmUpdateDTO.getName(), algorithmUpdateDTO.getDescription(), algorithmUpdateDTO.getCron()));
     }
 }

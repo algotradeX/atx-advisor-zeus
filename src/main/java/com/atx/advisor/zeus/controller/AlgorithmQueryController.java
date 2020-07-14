@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Controller
 @RestController
@@ -36,8 +37,8 @@ public class AlgorithmQueryController {
             @ApiResponse(code = 200, message = "Returns AlgorithmQueryEntity model", response = AlgorithmQueryEntity.class )
     })
     @GetMapping("/{algorithmId}/entity")
-    public AlgorithmQueryEntity getAlgorithmById(@PathVariable(value = "algorithmId") String algorithmId) {
-        log.info("AlgorithmCommandController : GET /algorithm/{}/entity", algorithmId);
+    public CompletableFuture<AlgorithmQueryEntity> getAlgorithmById(@PathVariable(value = "algorithmId") String algorithmId) {
+        log.info("AlgorithmQueryController : GET /algorithm/{}/entity", algorithmId);
         return algorithmQueryService.getAlgorithmById(algorithmId);
     }
 
@@ -46,10 +47,9 @@ public class AlgorithmQueryController {
             @ApiResponse(code = 200, message = "Returns AlgorithmQueryEntity model", response = AlgorithmListEventResponse.class )
     })
     @GetMapping("/{algorithmId}/events")
-    public AlgorithmListEventResponse getAllEventsForAlgorithm(@PathVariable(value = "algorithmId") String algorithmId) {
-        log.info("AlgorithmCommandController : GET /algorithm/{}/events", algorithmId);
-        List<Object> eventsList = algorithmQueryService.listEventsForAlgorithm(algorithmId);
-        return new AlgorithmListEventResponse(algorithmId, eventsList);
+    public CompletableFuture<List<Object>> getAllEventsForAlgorithm(@PathVariable(value = "algorithmId") String algorithmId) {
+        log.info("AlgorithmQueryController : GET /algorithm/{}/events", algorithmId);
+        return algorithmQueryService.listEventsForAlgorithm(algorithmId);
     }
 
 }

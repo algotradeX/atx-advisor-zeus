@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.atx.core</groupId>
 	<artifactId>zeus</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>atx-advisor-zeus</name>
 	<description>Core Assistant Service</description>
 

@@ -34,6 +34,12 @@ The following guides illustrate how to use some features concretely:
 ### API Documentation
 API Docs are generated using SpringFox Swagger2
 
-API Docs UI can be found at [http://localhost:8111/swagger-ui.html#/](http://localhost:8111/swagger-ui.html#/)
+API Docs UI can be found at [http://localhost:8111/api/v1/zeus/swagger-ui.html](http://localhost:8111/api/v1/zeus/swagger-ui.html)
+
+
+### H2 Database
+H2 Database Dashboard can be found at [http://localhost:8111/api/v1/zeus/h2-console](http://localhost:8111/api/v1/zeus/h2-console)
+
+
 
 

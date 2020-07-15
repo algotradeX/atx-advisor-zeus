@@ -18,7 +18,7 @@
 		<java.version>11</java.version>
 		<spring-cloud.version>2020-1.BUILD-SNAPSHOT</spring-cloud.version>
 		<axon-spring-boot.version>4.3.5</axon-spring-boot.version>
-		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<springfox-swagger2.version>3.0.0</springfox-swagger2.version>
 
 		<maven.skipTests>false</maven.skipTests>
 		<maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>

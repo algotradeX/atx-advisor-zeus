@@ -7,7 +7,7 @@ on:
   pull_request:
       types: [opened, synchronize, reopened]
       
-name: Sonar Upload
+name: SonarCloud Analysis
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest

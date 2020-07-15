@@ -55,7 +55,7 @@ API Docs UI can be found at [http://localhost:8111/api/v1/zeus/swagger-ui.html](
 
 
 ### H2 Database
-H2 Database Dashboard can be found at [http://localhost:8111/api/v1/zeus/h2-console](http://localhost:8111/api/v1/zeus/h2-console)
+H2 Database Console can be found at [http://localhost:8111/api/v1/zeus/h2-console](http://localhost:8111/api/v1/zeus/h2-console)
 
 
 
